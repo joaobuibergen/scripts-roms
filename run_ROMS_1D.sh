@@ -126,7 +126,7 @@ gawk -i inplace -v awkvar="$DIANAME" '/DIANAME ==/ {$3=awkvar}; {print}' $INPUT
 
 export OMP_NUM_THREADS
 
-LOG=log.$TITLE"_"$RUN_TAG
+LOG=log.$RUN_TAG
 
 $ROMS < $INPUT > log
 
