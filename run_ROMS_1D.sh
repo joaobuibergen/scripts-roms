@@ -96,7 +96,7 @@ gawk -i inplace -v awkvar="$NDIA" '/NDIA ==/ {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$GRDNAME" 'NR==964 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$ININAME" 'NR==965 {$3=awkvar}; {print}' $INPUT
 m=$(printf "%0*d\n" $padtowidth $FRCMSTART)
-FRCFILES=$DATA_DIR"/mf_m26_frc_"$FRCYSTART"_"$m".nc|"
+FRCFILES=$DATA_DIR"/"$FRCYSTART"_"$m".nc|"
 #gawk -i inplace -v awkvar="$FRCFILES" 'NR==1051 {$3=awkvar}; {print}' $INPUT
 
 let "FRCMEND-=1" 
@@ -107,12 +107,12 @@ do
 	do
 		#FRCFILES+=$(printf "%s|\n" $DATA_DIR"/mf_m26_frc_"$y"_"$m".nc")
 		mm=$(printf "%0*d\n" $padtowidth $m)
-		FRCFILES+=$DATA_DIR"/mf_m26_frc_"$y"_"$mm".nc|"$'\n'
+                FRCFILES+=$DATA_DIR"/"$FRCNAME$y"_"$mm".nc|"$'\n'
 	done	
 done
 let "FRCMEND+=1"
 mm=$(printf "%0*d\n" $padtowidth $FRCMEND)
-FRCFILES+=$DATA_DIR"/mf_m26_frc_"$FRCYEND"_"$mm".nc"
+FRCFILES+=$DATA_DIR"/"$FRCNAME$FRCYEND"_"$mm".nc"
 #echo "$FRCFILES"
 gawk -i inplace -v awkvar="$FRCFILES" '/FRCNAME ==/ {$3=awkvar}; {print}' $INPUT
 
