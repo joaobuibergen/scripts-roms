@@ -3,9 +3,9 @@
 # Script to run the ROMS model in 1-D configuration
 #
 
-PROJECT_DIR=/Users/joao/SEAS/Models/Masfjorden/M26_IC_KB2020603
+PROJECT_DIR=/home/johor1356/simulations/Masfjorden/M24_2015
 
-DATA_DIR=$PROJECT_DIR/Data
+DATA_DIR=/home/johor1356/scratch/Fjords-1D/Masfjorden/
 
 OUTPUT_DIR=$PROJECT_DIR/Output
 
@@ -24,17 +24,22 @@ ROMS=$PROJECT_DIR/romsO
 
 # Run parameters
 
-MASTER_INPUT=mf_1d.in
+MASTER_INPUT=/home/johor1356/simulations/Masfjorden/mf_1d.in
 
-TITLE=Masfjorden_1D_M26
+TITLE=MF_1D_M24_GS2019114
 
-RUN_TAG=TEST0
+RUN_TAG=TEST1Y
 
 APP_CPP=MF_1D
 
-N=30
+N=120
+Vtransform=2
+Vstretching=4
+theta_s=7
+theta_b=6
+tcline=200
 
-NTIMES=52560
+NTIMES=52704
 DT=600.0d0
 NDTFAST=30
 
@@ -42,16 +47,17 @@ NHIS=80
 NAVG=80
 NDIA=144
 
-DSTART=7124.0d0
+DSTART=5752.0d0
 
-FRCYSTART=2020
-FRCYEND=2021
+FRCYSTART=2015
+FRCYEND=2016
 
 FRCMSTART=1
 FRCMEND=12
 
 GRDNAME=$DATA_DIR/mf_1d_grd.nc
-ININAME=$DATA_DIR/mf_m26_ini.nc
+ININAME=$DATA_DIR/initial/m24_ini_gs2019114_2015.nc
+FRCNAME=forcing/mf_m24_frc_
 
 
 RSTNAME=$OUTPUT_DIR/$TITLE"_"$RUN_TAG"_rst.nc"
@@ -75,6 +81,11 @@ TMP=$TITLE"_"$RUN_TAG
 gawk -i inplace -v awkvar="$TMP" 'NR==68 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$APP_CPP" 'NR==72 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$N" 'NR==97 {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$Vtransform" '/Vtransform ==/ {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$Vstretching" '/Vstretching ==/ {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$theta_s" '/THETA_S ==/ {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$theta_b" '/THETA_B ==/ {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$tcline" '/TCLINE ==/ {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$NTIMES" 'NR==225 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$DT" 'NR==226 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$NDTFAST" 'NR==227 {$3=awkvar}; {print}' $INPUT
