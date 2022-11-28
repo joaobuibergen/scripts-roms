@@ -38,6 +38,10 @@ NTIMES=52560
 DT=600.0d0
 NDTFAST=30
 
+NHIS=80
+NAVG=80
+NDIA=144
+
 DSTART=7124.0d0
 
 FRCYSTART=2020
@@ -75,6 +79,9 @@ gawk -i inplace -v awkvar="$NTIMES" 'NR==225 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$DT" 'NR==226 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$NDTFAST" 'NR==227 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$DSTART" 'NR==423 {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$NHIS" '/NHIS ==/ {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$NAVG" '/NAVG ==/ {$3=awkvar}; {print}' $INPUT
+gawk -i inplace -v awkvar="$NDIA" '/NDIA ==/ {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$GRDNAME" 'NR==964 {$3=awkvar}; {print}' $INPUT
 gawk -i inplace -v awkvar="$ININAME" 'NR==965 {$3=awkvar}; {print}' $INPUT
 m=$(printf "%0*d\n" $padtowidth $FRCMSTART)
