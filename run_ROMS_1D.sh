@@ -3,6 +3,8 @@
 # Script to run the ROMS model in 1-D configuration
 #
 
+$GAWK=/home/johor1356/opt/bin/$GAWK
+
 PROJECT_DIR=/home/johor1356/simulations/Masfjorden/M24_2015
 
 DATA_DIR=/home/johor1356/scratch/Fjords-1D/Masfjorden/
@@ -78,26 +80,26 @@ cp $MASTER_INPUT $INPUT
 
 TMP=$TITLE"_"$RUN_TAG
 
-gawk -i inplace -v awkvar="$TMP" 'NR==68 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$APP_CPP" 'NR==72 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$N" 'NR==97 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$Vtransform" '/Vtransform ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$Vstretching" '/Vstretching ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$theta_s" '/THETA_S ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$theta_b" '/THETA_B ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$tcline" '/TCLINE ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$NTIMES" 'NR==225 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$DT" 'NR==226 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$NDTFAST" 'NR==227 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$DSTART" 'NR==423 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$NHIS" '/NHIS ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$NAVG" '/NAVG ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$NDIA" '/NDIA ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$GRDNAME" 'NR==964 {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$ININAME" 'NR==965 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$TMP" 'NR==68 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$APP_CPP" 'NR==72 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$N" 'NR==97 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$Vtransform" '/Vtransform ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$Vstretching" '/Vstretching ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$theta_s" '/THETA_S ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$theta_b" '/THETA_B ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$tcline" '/TCLINE ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$NTIMES" 'NR==225 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$DT" 'NR==226 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$NDTFAST" 'NR==227 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$DSTART" 'NR==423 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$NHIS" '/NHIS ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$NAVG" '/NAVG ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$NDIA" '/NDIA ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$GRDNAME" 'NR==964 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$ININAME" 'NR==965 {$3=awkvar}; {print}' $INPUT
 m=$(printf "%0*d\n" $padtowidth $FRCMSTART)
 FRCFILES=$DATA_DIR"/"$FRCYSTART"_"$m".nc|"
-#gawk -i inplace -v awkvar="$FRCFILES" 'NR==1051 {$3=awkvar}; {print}' $INPUT
+#$GAWK -i inplace -v awkvar="$FRCFILES" 'NR==1051 {$3=awkvar}; {print}' $INPUT
 
 let "FRCMEND-=1" 
 FRCFILES=""
@@ -114,13 +116,13 @@ let "FRCMEND+=1"
 mm=$(printf "%0*d\n" $padtowidth $FRCMEND)
 FRCFILES+=$DATA_DIR"/"$FRCNAME$FRCYEND"_"$mm".nc"
 #echo "$FRCFILES"
-gawk -i inplace -v awkvar="$FRCFILES" '/FRCNAME ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$FRCFILES" '/FRCNAME ==/ {$3=awkvar}; {print}' $INPUT
 
 
-gawk -i inplace -v awkvar="$RSTNAME" '/RSTNAME ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$HISNAME" '/HISNAME ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$AVGNAME" '/AVGNAME ==/ {$3=awkvar}; {print}' $INPUT
-gawk -i inplace -v awkvar="$DIANAME" '/DIANAME ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$RSTNAME" '/RSTNAME ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$HISNAME" '/HISNAME ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$AVGNAME" '/AVGNAME ==/ {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$DIANAME" '/DIANAME ==/ {$3=awkvar}; {print}' $INPUT
 
 # Run model
 
