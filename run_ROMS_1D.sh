@@ -3,7 +3,7 @@
 # Script to run the ROMS model in 1-D configuration
 #
 
-$GAWK=/home/johor1356/opt/bin/$GAWK
+GAWK=/home/johor1356/opt/bin/gawk
 
 PROJECT_DIR=/home/johor1356/simulations/Masfjorden/M24_2015
 
