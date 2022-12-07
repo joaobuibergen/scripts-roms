@@ -57,6 +57,8 @@ FRCYEND=2016
 FRCMSTART=1
 FRCMEND=12
 
+RESTART=-1
+
 GRDNAME=$DATA_DIR/mf_1d_grd.nc
 ININAME=$DATA_DIR/initial/m24_ini_gs2019114_2015.nc
 FRCNAME=forcing/mf_m24_frc_
@@ -92,6 +94,7 @@ $GAWK -i inplace -v awkvar="$NTIMES" 'NR==225 {$3=awkvar}; {print}' $INPUT
 $GAWK -i inplace -v awkvar="$DT" 'NR==226 {$3=awkvar}; {print}' $INPUT
 $GAWK -i inplace -v awkvar="$NDTFAST" 'NR==227 {$3=awkvar}; {print}' $INPUT
 $GAWK -i inplace -v awkvar="$DSTART" 'NR==423 {$3=awkvar}; {print}' $INPUT
+$GAWK -i inplace -v awkvar="$RESTART" '/NRREC ==/ {$3=awkvar}; {print}' $INPUT
 $GAWK -i inplace -v awkvar="$NHIS" '/NHIS ==/ {$3=awkvar}; {print}' $INPUT
 $GAWK -i inplace -v awkvar="$NAVG" '/NAVG ==/ {$3=awkvar}; {print}' $INPUT
 $GAWK -i inplace -v awkvar="$NDIA" '/NDIA ==/ {$3=awkvar}; {print}' $INPUT
